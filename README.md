@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Berikut adalah template README yang menarik untuk sistem pengajuan pembelian barang:
 
-## Getting Started
+---
 
-First, run the development server:
+# 🛒 Sistem Pengajuan Pembelian Barang
+
+Selamat datang di **Sistem Pengajuan Pembelian Barang**! Aplikasi ini dirancang untuk mempermudah proses permintaan, persetujuan, dan pengelolaan pembelian barang di perusahaan. Dengan alur persetujuan yang terstruktur, pengguna dapat mengajukan permintaan barang dan mendapatkan persetujuan dari supervisor atau manajer secara cepat dan transparan.
+
+## 🌟 Fitur Utama
+
+1. **Permintaan Pembelian Barang**  
+   Pengguna dapat dengan mudah membuat dan mengirimkan permintaan pembelian barang ke supervisor.
+
+2. **Alur Persetujuan yang Fleksibel**  
+   Permintaan dapat disetujui langsung oleh supervisor atau diteruskan ke manajer untuk persetujuan lebih lanjut.
+
+3. **Histori Pembelian**  
+   Lacak semua permintaan yang pernah diajukan dengan tampilan histori yang lengkap dan rapi.
+
+4. **Dashboard Persetujuan**  
+   Supervisor dan manajer memiliki akses ke dashboard yang memudahkan mereka melihat dan memproses permintaan pembelian.
+
+## 🚀 Cara Memulai
+
+Berikut langkah-langkah untuk memulai proyek ini di lingkungan lokal Anda:
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/agungsukaafk/sppb.git
+cd sistem-pengajuan-pembelian
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Database
+
+- Pastikan Anda memiliki **MySQL** terpasang.
+- Buat database dengan nama `purchase_system`.
+- Update konfigurasi database di file `.env`:
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=purchase_system
+```
+
+### 4. Migrasi Database
+
+```bash
+npx prisma migrate dev
+```
+
+### 5. Menjalankan Aplikasi
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka browser dan akses aplikasi di `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📊 Alur Proses Pengajuan
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Pengguna Biasa**:
 
-## Learn More
+   - Membuat permintaan pembelian barang.
+   - Menunggu persetujuan supervisor.
 
-To learn more about Next.js, take a look at the following resources:
+2. **Supervisor**:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Memproses permintaan.
+   - Dapat langsung menyetujui, menolak, atau meminta persetujuan manajer.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Manajer**:
+   - Meninjau permintaan yang memerlukan persetujuan akhir.
+   - Menyetujui atau menolak permintaan berdasarkan kebijakan.
 
-## Deploy on Vercel
+## 🛠️ Teknologi yang Digunakan
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend**: React dengan Next.js
+- **Backend**: Express.js
+- **Database**: MySQL
+- **Autentikasi**: JWT (JSON Web Token)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 Dokumentasi API
+
+Kami juga menyediakan dokumentasi API untuk membantu pengembang lain dalam mengintegrasikan sistem ini. Dokumentasi API dapat diakses melalui endpoint `/api/docs` (WIP).
+
+## 🤝 Kontribusi
+
+Kami sangat terbuka terhadap kontribusi! Jika Anda ingin berkontribusi:
+
+1. Fork repository ini.
+2. Buat branch fitur baru (`git checkout -b feature-fitur-baru`).
+3. Commit perubahan Anda (`git commit -m 'Menambahkan fitur baru'`).
+4. Push ke branch (`git push origin feature-fitur-baru`).
+5. Buat Pull Request.
+
+## 📬 Kontak
+
+Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi kami di [email@example.com](mailto:email@example.com).
+
+---
+
+⭐ Jangan lupa untuk memberi bintang di repository ini jika Anda merasa aplikasi ini bermanfaat!
+
+---
+
+README ini dibuat agar jelas dan menarik, memberikan gambaran yang lengkap tentang sistem pengajuan pembelian barang, dari fitur, cara instalasi, hingga kontribusi.

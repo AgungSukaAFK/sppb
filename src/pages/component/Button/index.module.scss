@@ -1,0 +1,51 @@
+.btn {
+  padding: 5px 20px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  &:hover {
+    filter: brightness(0.8);
+  }
+  &:active {
+    filter: brightness(0.6);
+  }
+  &__disabled {
+    cursor: not-allowed;
+    &:hover {
+      filter: none;
+    }
+  }
+}
+
+.button {
+  &__primary {
+    @extend .btn;
+    background-color: var(--accent);
+    color: var(--text-invert);
+    &__disabled {
+      @extend .btn__disabled;
+      background-color: var(--accent-secondary);
+    }
+  }
+  &__submit {
+    @extend .btn;
+    background-color: var(--success);
+    color: var(--text-invert);
+    &__disabled {
+      @extend .btn__disabled;
+      background-color: var(--success-disabled);
+    }
+  }
+  &__danger {
+    @extend .btn;
+    background-color: var(--danger);
+    color: var(--text-invert);
+    &__disabled {
+      @extend .btn__disabled;
+      background-color: var(--danger-disabled);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import "@/mixin.scss";
+
+:root {
+  @include break(lg) {
+    font-size: 18px;
+  }
+  @include break(md) {
+    font-size: 16px;
+  }
+  @include break(sm) {
+    font-size: 14px;
+  }
+  @include break(xs) {
+    font-size: 12px;
+  }
+}

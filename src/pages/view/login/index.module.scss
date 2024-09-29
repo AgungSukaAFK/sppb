@@ -1,0 +1,89 @@
+@import "@/mixin.scss";
+.c {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+
+  &__f {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 30px;
+    border-radius: 3deg;
+    box-shadow: 0 4px 12px 4px rgba($color: #000000, $alpha: 0.25);
+    &__logo {
+      font-size: 1.4rem;
+      width: fit-content;
+      text-emphasis: "🗿";
+      border-bottom: 4px solid var(--border);
+    }
+    &__header {
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    &__input {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      i {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        color: var(--border);
+        font-size: 2rem;
+        cursor: pointer;
+      }
+      input {
+        background: none;
+        outline: none;
+        border-radius: 3px;
+        border: none;
+        padding: 10px;
+        border-bottom: 3px solid var(--border);
+      }
+    }
+    &__btn {
+      padding: 10px 0 !important;
+    }
+  }
+}
+
+.alert {
+  width: 100%;
+  padding-top: 5px;
+  font-size: 0.875rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  &::before {
+    position: absolute;
+    z-index: 0;
+    top: 100%;
+    left: 0;
+    background-color: var(--accent-tertiary);
+    width: 100%;
+    height: 4px;
+    content: "";
+    animation: disappear 5s ease-out;
+  }
+}
+
+@keyframes disappear {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
