@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import s from "./index.module.scss";
 import Button from "@/pages/component/Button";
-import { api } from "@/lib/axios/services";
 import { authServices } from "@/services/auth";
 import { useLoading } from "@/hooks/useLoading";
 
@@ -38,7 +37,7 @@ export default function LoginView() {
         console.log(res);
         setAlert("Fail");
       }
-    } catch (error) {
+    } catch {
       setAlert("Something wrong from server");
     } finally {
       setLoading(false);

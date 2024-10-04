@@ -4,5 +4,6 @@ export type User = {
   nama?: string;
   email?: string;
   phone?: string;
-  role?: string;
+  role: "user" | "admin";
+  date_created?: string;
 };

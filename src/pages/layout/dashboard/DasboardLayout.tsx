@@ -3,14 +3,26 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import s from "./index.module.scss";
 import { authServices } from "@/services/auth";
 import { useLoading } from "@/hooks/useLoading";
+import Button from "@/pages/component/Button";
 
 interface DashbaordLayoutProps {
   children: ReactNode;
+  pageTitle?: string;
+  role?: "user" | "admin";
 }
 
-export default function DashbaordLayout({ children }: DashbaordLayoutProps) {
+export default function DashbaordLayout({
+  children,
+  pageTitle = "Loading...",
+  role = "user",
+}: DashbaordLayoutProps) {
+  const [pageUrl, setPageUrl] = useState<string | null>(null);
+  useEffect(() => {
+    setPageUrl(window.location.pathname);
+  }, []);
+
   const sidebarOptions = {
-    member: [
+    user: [
       { title: "Dashboard", url: "/dashboard", icon: "bx bx-home" },
       {
         title: "Pengajuan",
@@ -40,9 +52,51 @@ export default function DashbaordLayout({ children }: DashbaordLayoutProps) {
             icon: "bx bx-edit",
           },
           {
-            title: "Logout",
-            url: "/auth/logout",
-            icon: "bx bx-log-out",
+            title: "Setting",
+            url: "/dashboard/setting-akun",
+            icon: "bx bx-cog",
+          },
+        ],
+      },
+    ],
+    admin: [
+      { title: "Dashboard", url: "/dashboard", icon: "bx bx-home" },
+      {
+        title: "Pengajuan",
+        url: "#",
+        icon: "bx bxs-shopping-bags",
+        subOption: [
+          {
+            title: "Buat",
+            url: "/dashboard/buat-pengajuan",
+            icon: "bx bx-add-to-queue",
+          },
+          {
+            title: "Riwayat",
+            url: "/dashboard/riwayat-pengajuan",
+            icon: "bx bx-history",
+          },
+        ],
+      },
+      {
+        title: "Akun",
+        url: "#",
+        icon: "bx bxs-user-account",
+        subOption: [
+          {
+            title: "Profil",
+            url: "/dashboard/profil-akun",
+            icon: "bx bx-edit",
+          },
+          {
+            title: "User Management",
+            url: "/dashboard/user-management",
+            icon: "bx bxs-user-detail",
+          },
+          {
+            title: "Setting",
+            url: "/dashboard/setting-akun",
+            icon: "bx bx-cog",
           },
         ],
       },
@@ -119,40 +173,49 @@ export default function DashbaordLayout({ children }: DashbaordLayoutProps) {
         <div className={s.sidebar__logo}>Logo</div>
         <div className={s.sidebar__content}>
           {/* Mapping option */}
-          {sidebarOptions.member.map((item, index) => {
-            if (item.subOption) {
-              return (
-                <div key={index} className={s.sidebar__content__item}>
-                  <div className={s.sidebar__content__item__header}>
-                    <i className={item.icon}></i>
-                    {item.title}
+          {sidebarOptions[role] &&
+            sidebarOptions[role].map((item, index) => {
+              if (item.subOption) {
+                return (
+                  <div key={index} className={s.sidebar__content__item}>
+                    <div className={s.sidebar__content__item__header}>
+                      <i className={item.icon}></i>
+                      {item.title}
+                    </div>
+                    <div className={s.sidebar__content__item__list}>
+                      {item.subOption.map((item, index) => {
+                        return (
+                          <a
+                            href={item.url}
+                            key={index}
+                            className={
+                              pageUrl === item.url
+                                ? s.sidebar__content__item__list__active
+                                : ""
+                            }
+                          >
+                            <i className={item.icon}></i> {item.title}
+                          </a>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <div className={s.sidebar__content__item__list}>
-                    {item.subOption.map((item, index) => {
-                      return (
-                        <a href={item.url} key={index}>
-                          <i className={item.icon}></i> {item.title}
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            } else {
-              return (
-                <a
-                  href={item.url}
-                  key={index}
-                  className={s.sidebar__content__item}
-                >
-                  <div className={s.sidebar__content__item__header}>
-                    <i className={item.icon}></i>
-                    {item.title}
-                  </div>
-                </a>
-              );
-            }
-          })}
+                );
+              } else {
+                return (
+                  <a
+                    href={item.url}
+                    key={index}
+                    className={s.sidebar__content__item}
+                  >
+                    <div className={s.sidebar__content__item__header}>
+                      <i className={item.icon}></i>
+                      {item.title}
+                    </div>
+                  </a>
+                );
+              }
+            })}
         </div>
       </div>
 
@@ -166,13 +229,35 @@ export default function DashbaordLayout({ children }: DashbaordLayoutProps) {
             ></i>
           </div>
           <div className={s.navbar__right}>
-            <button onClick={logout}>Logout</button>
+            <Button type="primary" onClick={logout}>
+              Logout
+            </Button>
             <div>v1.0</div>
           </div>
         </div>
         <div className={s.content}>
           <div className={s.content__header}>
-            <div className={s.content__header__title}>Dashboard</div>
+            <div className={s.content__header__title}>{pageTitle}</div>
+            <div className="gap-2 text-xs hidden sm:flex">
+              {/* Breadcrumbs */}
+              {pageUrl?.split("/").map((item, index, arr) => {
+                if (item == "") {
+                  return;
+                } else if (index === arr.length - 1) {
+                  return <div key={index}>{item}</div>;
+                } else {
+                  return (
+                    <a
+                      href={`/${item}`}
+                      key={index}
+                      className="text-blue-600 flex gap-2"
+                    >
+                      {item} <span>/</span>
+                    </a>
+                  );
+                }
+              })}
+            </div>
           </div>
           <div className={s.content__body}>
             {/* Sections */}

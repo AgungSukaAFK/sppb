@@ -90,6 +90,9 @@
             font-size: 1.5rem;
           }
         }
+        &__active {
+          background-color: var(--bg-secondary);
+        }
       }
     }
   }

@@ -9,6 +9,15 @@ type ButtonProps = {
   type?: "primary" | "submit" | "delete";
 };
 
+// Contoh penggunaan cta
+// const cta: CtaType = [
+//   {
+//     text: "Anjay",
+//     onClick: () => {},
+//     type: "primary",
+//   },
+// ];
+
 export default function Button({
   children,
   className,

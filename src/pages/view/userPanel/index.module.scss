@@ -1,0 +1,41 @@
+@import "@/mixin.scss";
+
+.dash {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  @include break(sm) {
+    height: 300px;
+  }
+  @include break(xxs) {
+    height: auto;
+  }
+  &__wrapper {
+    flex-grow: 1;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+    overflow-x: auto;
+    gap: 10px;
+
+    &__item {
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      span {
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        &::after {
+          content: ":";
+        }
+      }
+      p {
+        padding-left: 10px;
+      }
+    }
+  }
+}
