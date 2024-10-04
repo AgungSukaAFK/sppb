@@ -13,7 +13,7 @@ export default function LoginView() {
   const [alert, setAlert] = useState("");
   const useridRef = useRef(null);
   const passRef = useRef(null);
-  const { setLoading } = useLoading();
+  const { showLoading, closeLoading } = useLoading();
   useEffect(() => {
     if (userId.length > 0 && password.length > 4) {
       setDisabled(false);
@@ -24,10 +24,9 @@ export default function LoginView() {
 
   async function login() {
     try {
-      setLoading(true);
+      showLoading()
       const res = await authServices.loginUser({ userid: userId, password });
       if (res.success) {
-        console.log(res.status);
         if (res.status === 200) {
           window.location.href = "/dashboard";
         } else {
@@ -40,7 +39,7 @@ export default function LoginView() {
     } catch {
       setAlert("Something wrong from server");
     } finally {
-      setLoading(false);
+      closeLoading();
     }
   }
 

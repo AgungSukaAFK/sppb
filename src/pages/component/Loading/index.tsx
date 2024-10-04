@@ -1,7 +1,11 @@
 import React from "react";
 import "./index.css";
 
-export default function Loading({ isLoading }: any) {
+interface LoadingProps {
+  isLoading: boolean;
+}
+
+export default function Loading({ isLoading }: LoadingProps) {
   return (
     <>
       {isLoading && (

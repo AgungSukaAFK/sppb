@@ -146,10 +146,10 @@ export default function DashbaordLayout({
   }, [sidebarOpen, isMobile]);
 
   // Navbar
-  const { setLoading } = useLoading();
+  const {showLoading, closeLoading} = useLoading();
   async function logout() {
     try {
-      setLoading(true);
+      showLoading()
       const res = await authServices.logoutUser();
       if (res) {
         window.location.href = "/auth";
@@ -159,7 +159,7 @@ export default function DashbaordLayout({
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      closeLoading();
     }
   }
 

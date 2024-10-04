@@ -1,6 +1,6 @@
 "use client";
 
-import { useLoading } from "@/hooks/useLoading";
+// import { useLoading } from "@/hooks/useLoading";
 import { userServices } from "@/services/user";
 import { User } from "@/types";
 import { useRouter } from "next/navigation";
@@ -19,11 +19,12 @@ export default function RoleProtectorProvider({
   const [role, setRole] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { push } = useRouter();
-  const { setLoading } = useLoading();
+  // const { setLoading } = useLoading();
 
   useEffect(() => {
     async function getUser() {
-      setLoading(true); // Set loading sebelum memulai request
+      // setLoading(true);
+      // Set loading sebelum memulai request
       try {
         const res = await userServices.whoAmI();
         if (res && res.data) {
@@ -34,12 +35,13 @@ export default function RoleProtectorProvider({
       } catch {
         setUser(null);
       } finally {
-        setLoading(false);
-        setIsLoading(false); // Set isLoading setelah request selesai
+        // setLoading(false);
+        setIsLoading(false);
+        // Set isLoading setelah request selesai
       }
     }
     getUser();
-  }, [setLoading]);
+  }, [setIsLoading]);
 
   useEffect(() => {
     if (user) {
@@ -60,5 +62,9 @@ export default function RoleProtectorProvider({
     return <>{children}</>; // Jika role sesuai, kembalikan children
   }
 
-  return null; // Jika tidak ada kondisi yang terpenuhi, tidak mengembalikan apa pun
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  return <></>; // Jika tidak ada kondisi yang terpenuhi, tidak mengembalikan apa pun
 }

@@ -1,11 +1,15 @@
-import LoadingContext from "@/context/LoadingContext";
-import { useContext } from "react";
+"use client";
 
-// Hook untuk menggunakan context dengan mudah
-export const useLoading = () => {
-  const context = useContext(LoadingContext);
-  if (context === undefined) {
-    throw new Error("useLoadingContext must be used within a LoadingProvider");
-  }
-  return context;
+import { create } from "zustand";
+
+type store = {
+  isLoading: boolean;
+  showLoading: () => void;
+  closeLoading: () => void;
 };
+
+export const useLoading = create<store>()((set) => ({
+  isLoading: false,
+  showLoading: () => set(() => ({ isLoading: true })),
+  closeLoading: () => set({ isLoading: false }),
+}));

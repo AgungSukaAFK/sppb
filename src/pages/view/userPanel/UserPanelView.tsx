@@ -10,10 +10,10 @@ import s from "./index.module.scss";
 
 export default function UserPanelView() {
   const [user, setUser] = useState<User | null>(null);
-  const { setLoading } = useLoading();
+  const { showLoading, closeLoading } = useLoading();
 
   useEffect(() => {
-    setLoading(true);
+    showLoading();
     async function getUser() {
       const user = await userServices.whoAmI();
       if (user && user.data) {
@@ -29,11 +29,11 @@ export default function UserPanelView() {
       } else {
         window.location.href = "/home";
       }
-      setLoading(false);
+      closeLoading();
     }
 
     getUser();
-  }, [setLoading]);
+  }, [closeLoading]);
 
   return (
     <DashbaordLayout pageTitle="Dashboard" role={user?.role}>

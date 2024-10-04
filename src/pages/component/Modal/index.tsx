@@ -17,6 +17,7 @@ function Modal({
   submit,
   close,
 }: ModalProps) {
+  console.log(type);
   return (
     <div className={s.m}>
       <div className={s.m__c}>

@@ -18,7 +18,7 @@ function UserManagement() {
   const searchRef = useRef<HTMLInputElement>(null);
   const [searchDisabled, setSearchDisabled] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const { setLoading } = useLoading();
+  const { showLoading, closeLoading } = useLoading();
 
   //   Modal - WIP
   const [modalAdd, setModalAdd] = useState<boolean>(true);
@@ -30,14 +30,14 @@ function UserManagement() {
   // first-time fetch users data
   useEffect(() => {
     try {
-      setLoading(true);
+      showLoading();
       async function getUsers() {
         const users = await userServices.getAll(offset);
         if (users && users.data) {
           setUsers(users.data);
-          return setLoading(false);
+          return closeLoading();
         } else {
-          return setLoading(false);
+          return closeLoading();
         }
       }
       async function searchUser() {
@@ -46,9 +46,9 @@ function UserManagement() {
           const users = await userServices.searchUser(prompt as string, offset);
           if (users && users.data) {
             setUsers(users.data);
-            return setLoading(false);
+            return closeLoading();
           } else {
-            return setLoading(false);
+            return closeLoading();
           }
         } else {
           setSearchMode(false);
@@ -62,7 +62,7 @@ function UserManagement() {
     } catch {
       console.log("Something error: cant get data from db");
     }
-  }, [offset, setLoading, searchMode, refresh]);
+  }, [offset, closeLoading, searchMode, refresh]);
 
   // Reset pagination saat berganti mode
   useEffect(() => {

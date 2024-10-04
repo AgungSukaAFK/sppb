@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./root.scss";
-import ThemeProvider from "@/pages/component/(provider)/ThemeProvider";
+import ThemeProvider from "@/pages/component/provider/ThemeProvider";
 import { Inter } from "next/font/google";
-import { LoadingProvider } from "@/context/LoadingContext";
+import LoadingProvider from "@/context/LoadingContext";
+// import { LoadingProvider } from "@/context/LoadingContext";
 
 const font = Inter({
   subsets: ["latin"],
@@ -29,9 +30,9 @@ export default function RootLayout({
         />
       </head>
       <body className={font.className}>
-        <ThemeProvider defaultTheme="light">
-          <LoadingProvider>{children}</LoadingProvider>
-        </ThemeProvider>
+        <LoadingProvider>
+          <ThemeProvider defaultTheme="light">{children}</ThemeProvider>
+        </LoadingProvider>
       </body>
     </html>
   );
