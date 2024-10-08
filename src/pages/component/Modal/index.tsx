@@ -5,33 +5,46 @@ import Button from "../Button";
 interface ModalProps {
   children: React.ReactNode;
   title?: string;
-  type?: "default";
+  type?: "prompt" | "information";
   close: () => void;
-  submit: () => void;
+  submit?: () => void;
 }
 
 function Modal({
   children,
   title = "Modal title",
-  type = "default",
-  submit,
+  type = "prompt",
+  submit = () => {},
   close,
 }: ModalProps) {
-  console.log(type);
-  return (
-    <div className={s.m}>
-      <div className={s.m__c}>
-        <header>{title}</header>
-        {children}
-        <footer>
-          <Button onClick={() => close()}>Kembali</Button>
-          <Button type="submit" onClick={() => submit()}>
-            Submit
-          </Button>
-        </footer>
+  if (type === "prompt") {
+    return (
+      <div className={s.m}>
+        <div className={`${s.m__c}`}>
+          <header>{title}</header>
+          <div className={s.m__c__w}>{children}</div>
+          <footer>
+            <Button onClick={() => close()}>Kembali</Button>
+            <Button type="submit" onClick={() => submit()}>
+              Submit
+            </Button>
+          </footer>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else if (type === "information") {
+    return (
+      <div className={s.m}>
+        <div className={`${s.m__c}`}>
+          <header>{title}</header>
+          <div className={s.m__c__w}>{children}</div>
+          <footer>
+            <Button onClick={() => close()}>Kembali</Button>
+          </footer>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Modal;

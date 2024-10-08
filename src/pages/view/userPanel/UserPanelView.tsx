@@ -33,10 +33,11 @@ export default function UserPanelView() {
     }
 
     getUser();
-  }, [closeLoading]);
+  }, [closeLoading, showLoading]);
 
   return (
     <DashbaordLayout pageTitle="Dashboard" role={user?.role}>
+      {/* Section: greetings & user's data */}
       {user && (
         <Section header={`Selamat datang, ${user.nama}!`} className={s.dash}>
           <div className={s.dash__wrapper}>
