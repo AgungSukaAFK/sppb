@@ -16,50 +16,23 @@ export default async function apiProtector(req: NextRequest) {
     }
 
     if (req.cookies) {
-      const token = (await cookies()).get("session")?.value;
+      const token = (cookies()).get("session")?.value;
       if (token) {
-        const decoded = await decrypt(token).catch((err) => {
-          return jsonResponse(
-            {
-              message: "Unauthorized, invalid token",
-              err
-            },
-            400
-          );
+        const decoded = await decrypt(token).catch(() => {
+          return NextResponse.redirect(new URL("/auth", req.url));
         });
         if (!decoded) {
-          return jsonResponse(
-            {
-              message: "Unauthorized, expired token",
-            },
-            400
-          );
+          return NextResponse.redirect(new URL("/auth", req.url));
         } else {
           return NextResponse.next();
         }
       } else {
-        return jsonResponse(
-          {
-            message: "Unauthorized",
-          },
-          400
-        );
+        return NextResponse.redirect(new URL("/auth", req.url));
       }
     } else {
-      return jsonResponse(
-        {
-          message: "Unauthorized, no token",
-        },
-        400
-      );
+      return NextResponse.redirect(new URL("/auth", req.url));
     }
-  } catch (err) {
-    return jsonResponse(
-      {
-        message: "Internal server error",
-        error: err,
-      },
-      500
-    );
+  } catch {
+    return NextResponse.redirect(new URL("/auth", req.url));
   }
 }

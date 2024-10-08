@@ -89,14 +89,21 @@ export default function DashbaordLayout({
             icon: "bx bx-edit",
           },
           {
-            title: "User Management",
-            url: "/dashboard/user-management",
-            icon: "bx bxs-user-detail",
-          },
-          {
             title: "Setting",
             url: "/dashboard/setting-akun",
             icon: "bx bx-cog",
+          },
+        ],
+      },
+      {
+        title: "Admin",
+        url: "#",
+        icon: "bx bxs-user-account",
+        subOption: [
+          {
+            title: "User Management",
+            url: "/dashboard/user-management",
+            icon: "bx bxs-user-detail",
           },
         ],
       },
@@ -146,10 +153,10 @@ export default function DashbaordLayout({
   }, [sidebarOpen, isMobile]);
 
   // Navbar
-  const {showLoading, closeLoading} = useLoading();
+  const { showLoading, closeLoading } = useLoading();
   async function logout() {
     try {
-      showLoading()
+      showLoading();
       const res = await authServices.logoutUser();
       if (res) {
         window.location.href = "/auth";
@@ -170,7 +177,7 @@ export default function DashbaordLayout({
         className={`${s.sidebar} ${!sidebarOpen && s.sidebar__hide}`}
         ref={sideRef}
       >
-        <div className={s.sidebar__logo}>Logo</div>
+        <div className={s.sidebar__logo}>SPPB</div>
         <div className={s.sidebar__content}>
           {/* Mapping option */}
           {sidebarOptions[role] &&

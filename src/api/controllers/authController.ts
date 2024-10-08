@@ -31,7 +31,7 @@ export const authController = {
       return jsonResponse({ message: "Password is required" }, 400);
     }
 
-    const data = await userServices.getUserByUserid(userid);
+    const data = await userServices.getPasswordByUserid(userid);
     if (data.length) {
       const user = data[0];
       if (user.password === password) {
