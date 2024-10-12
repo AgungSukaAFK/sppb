@@ -31,7 +31,7 @@ export default function RootLayout({
       </head>
       <body className={font.className}>
         <LoadingProvider>
-          <ThemeProvider defaultTheme="light">{children}</ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </LoadingProvider>
       </body>
     </html>

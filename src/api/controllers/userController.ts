@@ -15,7 +15,7 @@ async function checkToken(tokenName: string) {
   }
 }
 
-async function getUserFromRequest() {
+export async function getUserFromRequest() {
   const token = await checkToken("session");
   if (token) {
     const user = await userServices.getUserByUserid(token.userid as string);

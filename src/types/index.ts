@@ -17,3 +17,8 @@ export type UserProperties =
   | "phone"
   | "role"
   | "date_created";
+
+export type UserSettings = {
+  theme: "nebula" | "jupiter" | "dark";
+  email: boolean;
+};
