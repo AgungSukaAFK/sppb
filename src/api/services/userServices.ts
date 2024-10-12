@@ -52,11 +52,20 @@ export const userServices = {
     role: string;
     password: string;
   }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [table]: [any[], any] = await pool.query(
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
       `INSERT INTO user (userid, nama, role, password) VALUES (?, ?, ?, ?)`,
       [userid, nama, role, password]
     );
+    if (table.affectedRows > 0) {
+      const setting = {
+        theme: "nebula",
+        email: false,
+      };
+      await pool.query(
+        `INSERT INTO user_setting (userid, preference) VALUES (?, ?)`,
+        [userid, JSON.stringify(setting)]
+      );
+    }
     return table;
   },
   updateUser: async (userid: string, data: User): Promise<ResultSetHeader> => {

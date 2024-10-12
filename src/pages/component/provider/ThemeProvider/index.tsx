@@ -9,7 +9,12 @@ export default function ThemeProvider({
   // cek apakah di local storage ada theme
   // jika ada, ambil dari local storage
   // jika tidak, ambil dari database user theme preference
-  // jika tidak ada juga, ambil default light
+  // jika tidak ada juga, ambil default nebula
   // Setiap user mengganti tema, simpan ke local storage juga
-  return <NextThemeProvider {...props}>{children}</NextThemeProvider>;
+
+  return (
+    <NextThemeProvider {...props} defaultTheme="nebula">
+      {children}
+    </NextThemeProvider>
+  );
 }
