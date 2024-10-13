@@ -87,4 +87,54 @@ export const userServices = {
     );
     return table;
   },
+  changeNama: async (
+    userid: string,
+    nama: string
+  ): Promise<ResultSetHeader> => {
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
+      "UPDATE user SET nama = ? WHERE userid = ?",
+      [nama, userid]
+    );
+    return table;
+  },
+  changeEmail: async (
+    userid: string,
+    email: string
+  ): Promise<ResultSetHeader> => {
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
+      "UPDATE user SET email = ? WHERE userid = ?",
+      [email, userid]
+    );
+    return table;
+  },
+  changePassword: async (
+    userid: string,
+    oldPassword: string,
+    newPassword: string
+  ): Promise<ResultSetHeader | false> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [user]: [any[], unknown] = await pool.query(
+      "SELECT password FROM user WHERE userid = ?",
+      [userid]
+    );
+    if (user[0].password !== oldPassword) {
+      return false;
+    } else {
+      const [table]: [ResultSetHeader, unknown] = await pool.query(
+        "UPDATE user SET password = ? WHERE userid = ?",
+        [newPassword, userid]
+      );
+      return table;
+    }
+  },
+  changePhone: async (
+    userid: string,
+    phone: string
+  ): Promise<ResultSetHeader> => {
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
+      "UPDATE user SET phone = ? WHERE userid = ?",
+      [phone, userid]
+    );
+    return table;
+  },
 };

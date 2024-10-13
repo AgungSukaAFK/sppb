@@ -15,7 +15,7 @@ export default function LoginView() {
   const passRef = useRef(null);
   const { showLoading, closeLoading } = useLoading();
   useEffect(() => {
-    if (userId.length > 0 && password.length > 4) {
+    if (userId.length > 0 && password.length > 3) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -24,7 +24,7 @@ export default function LoginView() {
 
   async function login() {
     try {
-      showLoading()
+      showLoading();
       const res = await authServices.loginUser({ userid: userId, password });
       if (res.success) {
         if (res.status === 200) {

@@ -10,23 +10,21 @@ const header = {
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
   headers: header,
-  timeout: 60 * 1000, // 1 Menit
+  timeout: 60 * 1000, 
   validateStatus: function (status) {
-    // Menganggap semua status di bawah 500 sebagai respons sukses
-    return status < 500; // Termasuk status 400 dianggap sebagai respons valid
+    return status < 500;
   },
 });
 
 instance.interceptors.response.use(
-  (response) => response, // Menangani response sukses
+  (response) => response, 
   (error) => {
-    // Menangani response error (500 ke atas)
     return Promise.reject(error);
   }
 );
 
 instance.interceptors.request.use(
-  (config) => config, // Sebelum request dikirim
+  (config) => config,
   (error) => Promise.reject(error)
 );
 

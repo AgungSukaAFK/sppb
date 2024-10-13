@@ -20,7 +20,10 @@
   &__cta {
     width: 100%;
     display: flex;
+    padding: 10px;
     gap: 20px;
     flex-wrap: wrap;
+    border-radius: 3px;
+    background-color: var(--bg-secondary);
   }
 }

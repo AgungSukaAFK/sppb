@@ -8,8 +8,46 @@ export const userServices = {
       .then((res) => res.data)
       .catch((err) => err);
   },
+  editNama: async (nama: string) => {
+    return instance
+      .put("/api/user", JSON.stringify({ action: "nama", data: nama }))
+      .then((res) => {
+        return { data: res.data, status: res.status };
+      })
+      .catch((err) => err);
+  },
+  editEmail: async (data: string) => {
+    return instance
+      .put("/api/user", JSON.stringify({ action: "email", data }))
+      .then((res) => {
+        return { data: res.data, status: res.status };
+      })
+      .catch((err) => err);
+  },
+  editPassword: async (oldPass: string, newPass: string) => {
+    return instance
+      .put(
+        "/api/user",
+        JSON.stringify({
+          action: "password",
+          data: { old: oldPass, new: newPass },
+        })
+      )
+      .then((res) => {
+        return { data: res.data, status: res.status };
+      })
+      .catch((err) => err);
+  },
+  editPhone: async (data: string) => {
+    return instance
+      .put("/api/user", JSON.stringify({ action: "phone", data }))
+      .then((res) => {
+        return { data: res.data, status: res.status };
+      })
+      .catch((err) => err);
+  },
+  // Semua fungsi di bawah ini only admin
   getUserById: async (userid: string) => {
-    // Admin only
     return instance
       .get(`/api/user/id/${userid}`)
       .then((res) => res.data)

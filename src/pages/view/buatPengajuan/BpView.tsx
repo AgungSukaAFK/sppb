@@ -1,9 +1,9 @@
-import DashbaordLayout from "@/pages/layout/dashboard/DasboardLayout";
+import DashboardLayout from "@/pages/layout/dashboard/DashboardLayout";
 
 export default function BpView() {
   return (
-    <DashbaordLayout pageTitle="Halaman Membuat Pengajuan">
+    <DashboardLayout pageTitle="Halaman Membuat Pengajuan">
       Hellow
-    </DashbaordLayout>
+    </DashboardLayout>
   );
 }

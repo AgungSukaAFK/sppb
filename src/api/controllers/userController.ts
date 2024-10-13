@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { decrypt } from "@/lib/jose";
 import { User } from "@/types";
 import { ResultSetHeader } from "mysql2";
+import { NextResponse } from "next/server";
 
 async function checkToken(tokenName: string) {
   const token = cookies().get(tokenName)?.value;
@@ -20,7 +21,7 @@ export async function getUserFromRequest() {
   if (token) {
     const user = await userServices.getUserByUserid(token.userid as string);
     if (user.length) {
-      return user[0];
+      return user[0] as User;
     } else {
       return false;
     }
@@ -30,7 +31,7 @@ export async function getUserFromRequest() {
 }
 
 export const userController = {
-  // Ini untuk publik yang authorized, karena hanya mendapatkan user dari data login
+  // All role
   getUserByUserid: async () => {
     const token = cookies().get("session")?.value;
     const decoded = await decrypt(token);
@@ -89,6 +90,7 @@ export const userController = {
       return jsonResponse({ message: "Something error", err }, 500);
     }
   },
+  // Admin
   getAllUser: async (offset: number) => {
     try {
       const decoded = await checkToken("session");
@@ -127,6 +129,7 @@ export const userController = {
       );
     }
   },
+  // Admin
   searchUser: async (searchQuery: string, offset: number) => {
     try {
       if (!searchQuery) {
@@ -175,6 +178,7 @@ export const userController = {
       );
     }
   },
+  // Admin
   createUser: async ({
     userid,
     nama,
@@ -233,6 +237,7 @@ export const userController = {
       );
     }
   },
+  // Admin
   updateUser: async (data: User) => {
     try {
       const user = await getUserFromRequest();
@@ -273,18 +278,19 @@ export const userController = {
       return jsonResponse({ message: "Something error", err }, 500);
     }
   },
+  // Admin
   deleteUser: async (userid: string) => {
     try {
       const user = await getUserFromRequest();
-      if (user.role !== "admin") {
-        return jsonResponse(
-          {
-            message: "Illegal access",
-          },
-          400
-        );
-      }
       if (user) {
+        if (user.role !== "admin") {
+          return jsonResponse(
+            {
+              message: "Illegal access",
+            },
+            400
+          );
+        }
         const deletedUser = await userServices.deleteUser(userid);
         if (deletedUser.affectedRows > 0) {
           return jsonResponse({
@@ -309,6 +315,118 @@ export const userController = {
     } catch (err) {
       console.log(err);
       return jsonResponse({ message: "Something error", err }, 500);
+    }
+  },
+  // All role
+  changeUserNama: async (nama: string) => {
+    try {
+      if (!nama) {
+        return jsonResponse({ message: "Nama tidak boleh kosong" }, 400);
+      }
+      const user = await getUserFromRequest();
+      if (!user) {
+        return NextResponse.redirect("/auth");
+      } else {
+        const result = await userServices.changeNama(
+          user.userid as string,
+          nama
+        );
+        if (result.affectedRows > 0) {
+          return jsonResponse({
+            message: "User updated",
+          });
+        } else {
+          return jsonResponse({ message: "User not found" }, 400);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return jsonResponse({ message: "Something went wrong", err }, 500);
+    }
+  },
+  changeUserEmail: async (email: string) => {
+    try {
+      if (!email) {
+        return jsonResponse({ message: "Email tidak boleh kosong" }, 400);
+      }
+      const user = await getUserFromRequest();
+      if (!user) {
+        return NextResponse.redirect("/auth");
+      } else {
+        const result = await userServices.changeEmail(
+          user.userid as string,
+          email
+        );
+        if (result.affectedRows > 0) {
+          return jsonResponse({
+            message: "User updated",
+          });
+        } else {
+          return jsonResponse({ message: "User not found" }, 400);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return jsonResponse({ message: "Something went wrong", err }, 500);
+    }
+  },
+  changeUserPassword: async (oldPassword: string, newPassword: string) => {
+    try {
+      if (!oldPassword || !newPassword) {
+        return jsonResponse({ message: "Input invalid" }, 400);
+      }
+      const user = await getUserFromRequest();
+      if (!user) {
+        return NextResponse.redirect("/auth");
+      } else {
+        const result = await userServices.changePassword(
+          user.userid as string,
+          oldPassword,
+          newPassword
+        );
+        if (!result) {
+          return jsonResponse({ message: "Old password incorrect" }, 400);
+        }
+        if (result.affectedRows > 0) {
+          return jsonResponse({
+            message: "User updated",
+          });
+        } else {
+          return jsonResponse({ message: "Old password incorrect." }, 400);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return jsonResponse({ message: "Something went wrong", err }, 500);
+    }
+  },
+  changeUserPhone: async (phone: string) => {
+    try {
+      if (!phone) {
+        return jsonResponse(
+          { message: "Nomor telepon tidak boleh kosong" },
+          400
+        );
+      }
+      const user = await getUserFromRequest();
+      if (!user) {
+        return NextResponse.redirect("/auth");
+      } else {
+        const result = await userServices.changePhone(
+          user.userid as string,
+          phone
+        );
+        if (result.affectedRows > 0) {
+          return jsonResponse({
+            message: "User updated",
+          });
+        } else {
+          return jsonResponse({ message: "User not found" }, 400);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return jsonResponse({ message: "Something went wrong", err }, 500);
     }
   },
 };

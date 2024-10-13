@@ -4,112 +4,26 @@ import s from "./index.module.scss";
 import { authServices } from "@/services/auth";
 import { useLoading } from "@/hooks/useLoading";
 import Button from "@/pages/component/Button";
-
-interface DashbaordLayoutProps {
+import { User } from "@/types";
+import sidebarOptionsJson from "./sidebarOptions.json";
+interface DashboardLayoutProps {
   children: ReactNode;
   pageTitle?: string;
-  role?: "user" | "admin";
+  role?: User["role"];
 }
 
-export default function DashbaordLayout({
+export default function DashboardLayout({
   children,
   pageTitle = "Loading...",
   role = "user",
-}: DashbaordLayoutProps) {
+}: DashboardLayoutProps) {
   const [pageUrl, setPageUrl] = useState<string | null>(null);
   useEffect(() => {
     setPageUrl(window.location.pathname);
   }, []);
 
-  const sidebarOptions = {
-    user: [
-      { title: "Dashboard", url: "/dashboard", icon: "bx bx-home" },
-      {
-        title: "Pengajuan",
-        url: "#",
-        icon: "bx bxs-shopping-bags",
-        subOption: [
-          {
-            title: "Buat",
-            url: "/dashboard/buat-pengajuan",
-            icon: "bx bx-add-to-queue",
-          },
-          {
-            title: "Riwayat",
-            url: "/dashboard/riwayat-pengajuan",
-            icon: "bx bx-history",
-          },
-        ],
-      },
-      {
-        title: "Akun",
-        url: "#",
-        icon: "bx bxs-user-account",
-        subOption: [
-          {
-            title: "Profil",
-            url: "/dashboard/profil-akun",
-            icon: "bx bx-edit",
-          },
-          {
-            title: "Setting",
-            url: "/dashboard/setting-akun",
-            icon: "bx bx-cog",
-          },
-        ],
-      },
-    ],
-    admin: [
-      { title: "Dashboard", url: "/dashboard", icon: "bx bx-home" },
-      {
-        title: "Pengajuan",
-        url: "#",
-        icon: "bx bxs-shopping-bags",
-        subOption: [
-          {
-            title: "Buat",
-            url: "/dashboard/buat-pengajuan",
-            icon: "bx bx-add-to-queue",
-          },
-          {
-            title: "Riwayat",
-            url: "/dashboard/riwayat-pengajuan",
-            icon: "bx bx-history",
-          },
-        ],
-      },
-      {
-        title: "Akun",
-        url: "#",
-        icon: "bx bxs-user-account",
-        subOption: [
-          {
-            title: "Profil",
-            url: "/dashboard/profil-akun",
-            icon: "bx bx-edit",
-          },
-          {
-            title: "Setting",
-            url: "/dashboard/setting-akun",
-            icon: "bx bx-cog",
-          },
-        ],
-      },
-      {
-        title: "Admin",
-        url: "#",
-        icon: "bx bxs-user-account",
-        subOption: [
-          {
-            title: "User Management",
-            url: "/dashboard/user-management",
-            icon: "bx bxs-user-detail",
-          },
-        ],
-      },
-    ],
-  };
-  //   Sidebar
+  const sidebarOptions = sidebarOptionsJson;
+
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const sideRef = useRef<HTMLDivElement | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);

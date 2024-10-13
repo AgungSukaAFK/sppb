@@ -59,6 +59,31 @@
   --danger-disabled: #ff6b6b;
 }
 
+[data-theme="dark"] {
+  --bg: #1b1b1b;
+  --bg-secondary: #313131;
+  --bg-invert: #ffffff;
+
+  --text: #ffffff;
+  --text-invert: #1b1b1b;
+
+  --sidebar-bg: #1b1b1b;
+
+  --accent: #5e9eff;
+  --accent-secondary: #285aa5;
+  --accent-tertiary: #0085f21a;
+  --accent-quaternary: #caf0f8;
+
+  --border: #858585;
+  --border-accent: #03045e;
+
+  --success: #008000;
+  --success-disabled: #06d6a0;
+
+  --danger: #ff0000;
+  --danger-disabled: #ff6b6b;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
