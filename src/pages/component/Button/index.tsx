@@ -6,7 +6,7 @@ type ButtonProps = {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
-  type?: "primary" | "submit" | "delete";
+  type?: "primary" | "submit" | "delete" | "unfocused";
 };
 
 // Contoh penggunaan cta
@@ -32,6 +32,8 @@ export default function Button({
       return disabled ? s.button__submit__disabled : s.button__submit;
     } else if (typeButton === "delete") {
       return disabled ? s.button__danger__disabled : s.button__danger;
+    } else if (typeButton === "unfocused") {
+      return disabled ? s.button__unfocused__disabled : s.button__unfocused;
     }
   }
 

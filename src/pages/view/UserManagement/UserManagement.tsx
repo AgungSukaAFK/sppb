@@ -1,6 +1,6 @@
 "use client";
 import Section from "@/pages/component/Section";
-import DashbaordLayout from "@/pages/layout/dashboard/DasboardLayout";
+import DashboardLayout from "@/pages/layout/dashboard/DashboardLayout";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import s from "./index.module.scss";
 import Button from "@/pages/component/Button";
@@ -268,7 +268,7 @@ function UserManagement() {
     }
   }, [modalDetail, modalAdd]);
   return (
-    <DashbaordLayout pageTitle="User Management" role="admin">
+    <DashboardLayout pageTitle="User Management" role="admin">
       <Section
         header="Daftar seluruh user"
         cta={[{ type: "primary", text: "Tambah User", onClick: showModalAdd }]}
@@ -399,6 +399,11 @@ function UserManagement() {
                   -- Pilih role --
                 </option>
                 <option value="user">User</option>
+                <option value="purchasing">Purchasing</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="manager">Manager</option>
+                <option value="director">Director</option>
+                <option value="finance">Finance</option>
                 <option value="admin">Admin</option>
               </select>
             </div>
@@ -526,6 +531,11 @@ function UserManagement() {
                   -- Pilih role --
                 </option>
                 <option value="user">User</option>
+                <option value="purchasing">Purchasing</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="manager">Manager</option>
+                <option value="director">Director</option>
+                <option value="finance">Finance</option>
                 <option value="admin">Admin</option>
               </select>
             </div>
@@ -547,7 +557,7 @@ function UserManagement() {
           </div>
         </Modal>
       )}
-    </DashbaordLayout>
+    </DashboardLayout>
   );
 }
 

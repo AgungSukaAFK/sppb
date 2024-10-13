@@ -48,4 +48,13 @@
       background-color: var(--danger-disabled);
     }
   }
+  &__unfocused {
+    @extend .btn;
+    background-color: none;
+    color: var(--text);
+    &__disabled {
+      @extend .btn__disabled;
+      background-color: var(--danger-disabled);
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { userController } from "@/api/controllers/userController";
 import { userSettingController } from "@/api/controllers/userSettingController";
 import { decrypt } from "@/lib/jose";
-import DashbaordLayout from "@/pages/layout/dashboard/DasboardLayout";
+import DashbaordLayout from "@/pages/layout/dashboard/DashboardLayout";
 import UserSettingView from "@/pages/view/userSetting/UserSettingView";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";

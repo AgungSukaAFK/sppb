@@ -4,7 +4,14 @@ export type User = {
   nama?: string;
   email?: string;
   phone?: string;
-  role: "user" | "admin";
+  role:
+    | "user"
+    | "purchasing"
+    | "supervisor"
+    | "manager"
+    | "director"
+    | "finance"
+    | "admin";
   date_created?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;

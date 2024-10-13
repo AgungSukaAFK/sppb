@@ -1,0 +1,302 @@
+{
+    "user": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "purchasing": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "supervisor": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "manager": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "director": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "finance": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      }
+    ],
+    "admin": [
+      {
+        "title": "Dashboard",
+        "url": "/dashboard",
+        "icon": "bx bx-home"
+      },
+      {
+        "title": "Pengajuan",
+        "url": "#",
+        "icon": "bx bxs-shopping-bags",
+        "subOption": [
+          {
+            "title": "Buat",
+            "url": "/dashboard/buat-pengajuan",
+            "icon": "bx bx-add-to-queue"
+          },
+          {
+            "title": "Riwayat",
+            "url": "/dashboard/riwayat-pengajuan",
+            "icon": "bx bx-history"
+          }
+        ]
+      },
+      {
+        "title": "Akun",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "Profil",
+            "url": "/dashboard/profil-akun",
+            "icon": "bx bx-edit"
+          },
+          {
+            "title": "Setting",
+            "url": "/dashboard/setting-akun",
+            "icon": "bx bx-cog"
+          }
+        ]
+      },
+      {
+        "title": "Admin",
+        "url": "#",
+        "icon": "bx bxs-user-account",
+        "subOption": [
+          {
+            "title": "User Management",
+            "url": "/dashboard/user-management",
+            "icon": "bx bxs-user-detail"
+          }
+        ]
+      }
+    ]
+  }
+  
