@@ -9,9 +9,9 @@ export default async function authProtector(req: NextRequest) {
     if (decoded) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     } else {
-      return NextResponse.next();
+      return null;
     }
   } else {
-    return NextResponse.next();
+    return null;
   }
 }

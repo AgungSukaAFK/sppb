@@ -29,18 +29,20 @@ export default function Section({
       <div className={s.section__header}>{header}</div>
       <hr />
       <div className={`${className}  ${s.section__body}`}>{children}</div>
-      <div className={s.section__cta}>
-        {cta?.map((item, index) => (
-          <Button
-            key={index}
-            type={item.type}
-            onClick={item.onClick}
-            disabled={item.disabled}
-          >
-            {item.text}
-          </Button>
-        ))}
-      </div>
+      {cta && (
+        <div className={s.section__cta}>
+          {cta?.map((item, index) => (
+            <Button
+              key={index}
+              type={item.type}
+              onClick={item.onClick}
+              disabled={item.disabled}
+            >
+              {item.text}
+            </Button>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -16,7 +16,7 @@ export default async function apiProtector(req: NextRequest) {
     }
 
     if (req.cookies) {
-      const token = (cookies()).get("session")?.value;
+      const token = cookies().get("session")?.value;
       if (token) {
         const decoded = await decrypt(token).catch(() => {
           return NextResponse.redirect(new URL("/auth", req.url));
@@ -24,7 +24,7 @@ export default async function apiProtector(req: NextRequest) {
         if (!decoded) {
           return NextResponse.redirect(new URL("/auth", req.url));
         } else {
-          return NextResponse.next();
+          return null;
         }
       } else {
         return NextResponse.redirect(new URL("/auth", req.url));

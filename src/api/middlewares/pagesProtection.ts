@@ -7,7 +7,7 @@ export default async function pagesProtector(req: NextRequest) {
   if (token) {
     const decoded = await decrypt(token);
     if (decoded) {
-      return NextResponse.next();
+      return null;
     } else {
       return NextResponse.redirect(new URL("/auth", req.url));
     }
