@@ -1,9 +1,13 @@
-import DashboardLayout from "@/pages/layout/dashboard/DashboardLayout";
+"use client";
+import Section from "@/pages/component/Section";
+import s from "./index.module.scss";
 
 export default function BpView() {
   return (
-    <DashboardLayout pageTitle="Halaman Membuat Pengajuan">
-      Hellow
-    </DashboardLayout>
+    <>
+      <Section header="Buat pengajuan baru" className={s.c}>
+        Create
+      </Section>
+    </>
   );
 }
