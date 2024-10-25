@@ -8,9 +8,17 @@ function validatePengajuan(data: Pengajuan) {
   return data.id && data.barang && data.barang?.length > 0;
 }
 
+async function validateUserRole(role: User["role"]) {
+  const user = await getUserFromRequest();
+  return user && user.role === role;
+}
+
 export const pengajuanController = {
   buatPengajuanBaru: async (data: Pengajuan) => {
     try {
+      if (!(await validateUserRole("user"))) {
+        return jsonResponse({ message: "Illegal access" }, 400);
+      }
       if (validatePengajuan(data)) {
         const pengajuan = await pengajuanServices.create(data);
         if (pengajuan.affectedRows > 0) {
@@ -25,21 +33,38 @@ export const pengajuanController = {
       return jsonResponse({ message: "Server error", error: e }, 500);
     }
   },
-  /*
-  Approval Purchasing
-  - Mengubah status ke supervisor
-  - Input harga barang dan vendor
-  - Menambah history
-
-  Alg:
-  1. Cek apakah ada user
-  2. Validasi inputApproval
-  3. Validasi inputPengajuan
-  4. Cek apakah user adalah purchasing
-  5. Cek apakah pengajuan ada
-  6. Tambahkan approval ke history
-  */
-
+  cancelPengajuan: async (idPengajuan: Pengajuan["id"]) => {
+    try {
+      const user = await getUserFromRequest();
+      if (!(await validateUserRole("user")) || !user) {
+        return jsonResponse({ message: "Illegal access" }, 400);
+      }
+      if (!idPengajuan) {
+        return jsonResponse({ message: "Invalid parameter" }, 400);
+      }
+      const pengajuan = await pengajuanServices.get(idPengajuan);
+      if (pengajuan.length < 1) {
+        return jsonResponse({ message: "Pengajuan tidak ditemukan" }, 400);
+      }
+      const pengajuanData: Pengajuan = pengajuan[0];
+      // Validasi apakah user = requester
+      if (pengajuanData.requester!.userid !== user.userid) {
+        return jsonResponse(
+          { message: "Illegal access, you are not the requester" },
+          400
+        );
+      }
+      // ubah status menjadi cancelled
+      const result = await pengajuanServices.cancel(idPengajuan);
+      if (result.affectedRows > 0) {
+        return jsonResponse({ message: "Pengajuan cancelled" });
+      } else {
+        return jsonResponse({ message: "Failed to cancel pengajuan" }, 500);
+      }
+    } catch (e) {
+      return jsonResponse({ message: "Server error", error: e }, 500);
+    }
+  },
   approvalPurchasing: async ({
     pengajuan,
     approval,

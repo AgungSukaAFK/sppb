@@ -7,7 +7,7 @@ import { ResultSetHeader } from "mysql2";
 // any[] untuk menangani ambil data
 
 export const pengajuanServices = {
-  // ambil pengajuan
+  // All - Ambil pengajuan
   get: async (id: number) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [table]: [any[], any] = await pool.query(
@@ -17,11 +17,20 @@ export const pengajuanServices = {
 
     return table;
   },
-  // Buat pengajuan baru
+  // User - Buat pengajuan baru
   create: async (data: Pengajuan) => {
     const [table]: [ResultSetHeader, unknown] = await pool.query(
       "INSERT INTO pengajuan (judul, requester, barang) VALUES (?, ?, ?)",
       [data.judul, JSON.stringify(data.requester), JSON.stringify(data.barang)]
+    );
+
+    return table;
+  },
+  // User - Cancel pengajuan
+  cancel: async (id: Pengajuan["id"]) => {
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
+      "UPDATE pengajuan SET status = ? WHERE id = ?",
+      ["cancelled", id!.toString()]
     );
 
     return table;
@@ -34,11 +43,7 @@ export const pengajuanServices = {
   ) => {
     const [table]: [ResultSetHeader, unknown] = await pool.query(
       "UPDATE pengajuan SET barang = ?, level = ? WHERE id = ?",
-      [
-        JSON.stringify(data.barang),
-        level,
-        data.id,
-      ]
+      [JSON.stringify(data.barang), level, data.id]
     );
     return table;
   },

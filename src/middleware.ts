@@ -54,7 +54,8 @@ export default async function middleware(req: NextRequest) {
   }
 
   // Middleware penangan json tidak sesuai, untuk method POST, PUT
-  if (req.method === "POST" || req.method === "PUT") {
+  const methods: string[] = ["POST", "PUT"];
+  if (methods.includes(req.method)) {
     let body;
     try {
       body = await req.json();
