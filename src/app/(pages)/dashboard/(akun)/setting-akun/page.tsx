@@ -6,6 +6,8 @@ import UserSettingView from "@/pages/view/userSetting/UserSettingView";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export default async function SettingAkunPage() {
   const cookie = cookies().get("session");
   const decoded = await decrypt(cookie?.value);
