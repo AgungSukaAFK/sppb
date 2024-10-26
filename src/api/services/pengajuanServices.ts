@@ -29,8 +29,22 @@ export const pengajuanServices = {
   // User - Cancel pengajuan
   cancel: async (id: Pengajuan["id"]) => {
     const [table]: [ResultSetHeader, unknown] = await pool.query(
-      "UPDATE pengajuan SET status = ? WHERE id = ?",
-      ["cancelled", id!.toString()]
+      "UPDATE pengajuan SET status = ?, level = ? WHERE id = ?",
+      ["cancelled", "history", id!.toString()]
+    );
+
+    return table;
+  },
+  // User = edit pengajuan
+  edit: async (data: Pengajuan) => {
+    const [table]: [ResultSetHeader, unknown] = await pool.query(
+      "UPDATE pengajuan SET judul = ?, lampiran = ?, barang = ? WHERE id = ?",
+      [
+        data.judul,
+        data.lampiran ? JSON.stringify(data.lampiran) : null,
+        JSON.stringify(data.barang),
+        data.id,
+      ]
     );
 
     return table;

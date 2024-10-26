@@ -17,12 +17,13 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const body = await request.json();
   if (body) {
-    return jsonResponse({ message: "TODO" });
+    return pengajuanController.editPengajuan(body as Pengajuan);
   } else {
     return jsonResponse({ message: "Invalid input data" }, 400);
   }
 }
 
+// User edit pengajuan
 export async function DELETE(request: NextRequest) {
   const idPengajuan = request.nextUrl.searchParams.get("id");
   if (idPengajuan && !isNaN(parseInt(idPengajuan))) {
