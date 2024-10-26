@@ -17,7 +17,7 @@ export type User = {
   [key: string]: any;
 };
 
-export type Pengajuan = {
+export interface Pengajuan {
   id?: number;
   judul?: string;
   requester?: { userid?: string; nama?: string };
@@ -42,7 +42,7 @@ export type Pengajuan = {
   barang?: Barang[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-};
+}
 
 export type Approval = {
   userid?: string;

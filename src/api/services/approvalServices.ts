@@ -19,4 +19,4 @@ export const approvalServices = {
     return table;
   },
 };
-// TODO: Edit and delete pengajuan by user (requester)
+// TODO: Edit and cancelled pengajuan by user (requester)
