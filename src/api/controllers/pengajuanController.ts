@@ -47,19 +47,84 @@ export const pengajuanController = {
         return jsonResponse({ message: "Pengajuan tidak ditemukan" }, 400);
       }
       const pengajuanData: Pengajuan = pengajuan[0];
-      // Validasi apakah user = requester
+      if (pengajuanData.level !== "purchasing") {
+        return jsonResponse(
+          { message: "Pengajuan tahap ini tidak dapat di cancel" },
+          400
+        );
+      }
       if (pengajuanData.requester!.userid !== user.userid) {
         return jsonResponse(
           { message: "Illegal access, you are not the requester" },
           400
         );
       }
-      // ubah status menjadi cancelled
       const result = await pengajuanServices.cancel(idPengajuan);
       if (result.affectedRows > 0) {
         return jsonResponse({ message: "Pengajuan cancelled" });
       } else {
         return jsonResponse({ message: "Failed to cancel pengajuan" }, 500);
+      }
+    } catch (e) {
+      return jsonResponse({ message: "Server error", error: e }, 500);
+    }
+  },
+  editPengajuan: async (data: Pengajuan) => {
+    /*
+    Cek user
+    Cek input
+    Cek apakah pengajuan ada
+    Cek pengajuan = purchasing
+    Cek user = requester
+    */
+    try {
+      const user = await getUserFromRequest();
+      if (!user) {
+        return jsonResponse({ message: "Illegal access" }, 400);
+      }
+      if (!validatePengajuan(data)) {
+        return jsonResponse({ message: "Invalid input data" }, 400);
+      }
+      const peng = await pengajuanServices.get(data.id!);
+      if (peng.length < 1) {
+        return jsonResponse({ message: "Pengajuan tidak ditemukan" }, 400);
+      }
+      const pengajuan: Pengajuan = peng[0];
+      if (pengajuan.level !== "purchasing") {
+        return jsonResponse(
+          { message: "Tidak bisa edit pengajuan di tahap ini" },
+          400
+        );
+      }
+      const allowedStatus: Pengajuan["status"][] = ["pending", "review"];
+      if (!allowedStatus.includes(pengajuan.status)) {
+        return jsonResponse(
+          { message: "Tidak bisa edit pengajuan dengan status tahap ini" },
+          400
+        );
+      }
+      if (pengajuan.requester!.userid !== user.userid) {
+        return jsonResponse(
+          { message: "Illegal access, you are not the requester" },
+          400
+        );
+      }
+      // Validasi selesai
+      const newPengajuan = { ...pengajuan };
+      if (data.judul && data.judul !== newPengajuan.judul) {
+        newPengajuan.judul = data.judul;
+      }
+      if (data.barang && data.barang !== newPengajuan.barang) {
+        newPengajuan.barang = data.barang;
+      }
+      if (data.lampiran && data.lampiran !== newPengajuan.lampiran) {
+        newPengajuan.lampiran = data.lampiran;
+      }
+      const editPengajuan = await pengajuanServices.edit(newPengajuan);
+      if (editPengajuan.affectedRows > 0) {
+        return jsonResponse({ message: "Pengajuan updated" });
+      } else {
+        return jsonResponse({ message: "Failed to update pengajuan" }, 500);
       }
     } catch (e) {
       return jsonResponse({ message: "Server error", error: e }, 500);

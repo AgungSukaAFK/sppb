@@ -2,6 +2,8 @@ import { userSettingController } from "@/api/controllers/userSettingController";
 import jsonResponse from "@/utils/jsonResponse";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const res = await userSettingController.getByUserid();
